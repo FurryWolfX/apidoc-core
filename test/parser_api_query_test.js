@@ -8,31 +8,17 @@
 var should = require('should');
 
 // lib modules
-var parser = require('../lib/parsers/api_param');
+var parser = require('../lib/parsers/api_query');
 
-describe('Parser: apiParam', function() {
+describe('Parser: apiQuery', function() {
 
     // TODO: Add 1.000 more possible cases ;-)
     var testCases = [
         {
-            title: 'Simple fieldname only',
-            content: 'simple',
-            expected: {
-                group: 'Parameter',
-                type: undefined,
-                size: undefined,
-                allowedValues: undefined,
-                optional: false,
-                field: 'simple',
-                defaultValue: undefined,
-                description: ''
-            }
-        },
-        {
             title: 'Type, Fieldname, Description',
             content: '{String} name The users name.',
             expected: {
-                group: 'Parameter',
+                group: 'Query',
                 type: 'String',
                 size: undefined,
                 allowedValues: undefined,
@@ -46,7 +32,7 @@ describe('Parser: apiParam', function() {
             title: 'Type, Fieldname, Description',
             content: '{String|String[]} name The users name.',
             expected: {
-                group: 'Parameter',
+                group: 'Query',
                 type: 'String|String[]',
                 size: undefined,
                 allowedValues: undefined,
@@ -60,7 +46,7 @@ describe('Parser: apiParam', function() {
             title: '$Simple fieldname only',
             content: '$simple',
             expected: {
-                group: 'Parameter',
+                group: 'Query',
                 type: undefined,
                 size: undefined,
                 allowedValues: undefined,
@@ -82,36 +68,6 @@ describe('Parser: apiParam', function() {
                 optional: true,
                 field: '\\MyClass\\field.user_first-name',
                 defaultValue: 'John Doe',
-                description: 'Some description.'
-            }
-        },
-        {
-            title: 'All options, without optional-marker',
-            content: ' ( MyGroup ) { \\Object\\String.uni-code_char[] { 1..10 } = \'abc\', \'def\' }  ' +
-                     '\\MyClass\\field.user_first-name = \'John Doe\' Some description.',
-            expected: {
-                group: 'MyGroup',
-                type: '\\Object\\String.uni-code_char[]',
-                size: '1..10',
-                allowedValues: [ '\'abc\'', '\'def\'' ],
-                optional: false,
-                field: '\\MyClass\\field.user_first-name',
-                defaultValue: 'John Doe',
-                description: 'Some description.'
-            }
-        },
-        {
-            title: 'All options, without optional-marker, without default value quotes',
-            content: ' ( MyGroup ) { \\Object\\String.uni-code_char[] { 1..10 } = \'abc\', \'def\' }  ' +
-                     '\\MyClass\\field.user_first-name = John_Doe Some description.',
-            expected: {
-                group: 'MyGroup',
-                type: '\\Object\\String.uni-code_char[]',
-                size: '1..10',
-                allowedValues: [ '\'abc\'', '\'def\'' ],
-                optional: false,
-                field: '\\MyClass\\field.user_first-name',
-                defaultValue: 'John_Doe',
                 description: 'Some description.'
             }
         },

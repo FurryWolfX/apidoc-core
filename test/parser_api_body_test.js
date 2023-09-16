@@ -8,9 +8,9 @@
 var should = require('should');
 
 // lib modules
-var parser = require('../lib/parsers/api_param');
+var parser = require('../lib/parsers/api_body');
 
-describe('Parser: apiParam', function() {
+describe('Parser: apiBody', function() {
 
     // TODO: Add 1.000 more possible cases ;-)
     var testCases = [
@@ -18,7 +18,7 @@ describe('Parser: apiParam', function() {
             title: 'Simple fieldname only',
             content: 'simple',
             expected: {
-                group: 'Parameter',
+                group: 'Body',
                 type: undefined,
                 size: undefined,
                 allowedValues: undefined,
@@ -32,7 +32,7 @@ describe('Parser: apiParam', function() {
             title: 'Type, Fieldname, Description',
             content: '{String} name The users name.',
             expected: {
-                group: 'Parameter',
+                group: 'Body',
                 type: 'String',
                 size: undefined,
                 allowedValues: undefined,
@@ -46,7 +46,7 @@ describe('Parser: apiParam', function() {
             title: 'Type, Fieldname, Description',
             content: '{String|String[]} name The users name.',
             expected: {
-                group: 'Parameter',
+                group: 'Body',
                 type: 'String|String[]',
                 size: undefined,
                 allowedValues: undefined,
@@ -60,7 +60,7 @@ describe('Parser: apiParam', function() {
             title: '$Simple fieldname only',
             content: '$simple',
             expected: {
-                group: 'Parameter',
+                group: 'Body',
                 type: undefined,
                 size: undefined,
                 allowedValues: undefined,
